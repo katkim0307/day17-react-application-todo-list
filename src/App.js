@@ -7,6 +7,10 @@ class Todo extends Component {
       tasks: [],
       newTask: '',
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.addTask = this.addTask.bind(this);
+    this.delTask = this.delTask.bind(this);
+    this.updateTask = this.updateTask.bind(this);
   };
 
   handleChange = (e) => {
@@ -31,6 +35,20 @@ class Todo extends Component {
     console.log(tasks);
   };
 
+  updateTask = (txt, idx) => {
+    let {tasks} = this.state;
+    console.log('task:'+tasks);
+    tasks.map((task, index) => {
+      if(index === idx) {
+        console.log(index + '   ' + idx);
+        tasks[idx] = txt;
+      }
+    });
+    this.setState ({
+      tasks: tasks
+    });
+  }
+
   delTask = (idx) => {
     const filteredTasks = this.state.tasks.filter((task, index) => {
       return index !== idx;
@@ -40,19 +58,19 @@ class Todo extends Component {
   };
 
   render () {
-    const {tasks} = this.state;
+    const {tasks, newTask} = this.state;
     return (
       <div className="container">
         <form onSubmit={this.addTask}>
           <label htmlFor="taskName" />
-          <input onChange={this.handleChange} name="taskName" type="text" placeholder= "Add a new task!"/>
+          <input onChange={this.handleChange} value={newTask} name="taskName" type="text" placeholder= "Add a new task!"/>
           <button type="submit">add</button>
         </form>
         <ul>
           {tasks.map((item, idx) => {
             return (
               <li key={idx}>
-                {item}
+                <input type="text" value={item} onChange ={(e) => this.updateTask(e.target.value, idx)} />
                 <button type="button" onClick={() => this.delTask(idx)}>del</button>
               </li>
             )
