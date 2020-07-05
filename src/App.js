@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import TodoForm from './TodoForm.js';
+import TodoList from './TodoList.js';
 
 class Todo extends Component {
   constructor () {
@@ -40,7 +42,7 @@ class Todo extends Component {
     console.log('task:'+tasks);
     tasks.map((task, index) => {
       if(index === idx) {
-        console.log(index + '   ' + idx);
+        // console.log(index + '   ' + idx);
         tasks[idx] = txt;
       }
     });
@@ -61,21 +63,8 @@ class Todo extends Component {
     const {tasks, newTask} = this.state;
     return (
       <div className="container">
-        <form onSubmit={this.addTask}>
-          <label htmlFor="taskName" />
-          <input onChange={this.handleChange} value={newTask} name="taskName" type="text" placeholder= "Add a new task!"/>
-          <button type="submit">add</button>
-        </form>
-        <ul>
-          {tasks.map((item, idx) => {
-            return (
-              <li key={idx}>
-                <input type="text" value={item} onChange ={(e) => this.updateTask(e.target.value, idx)} />
-                <button type="button" onClick={() => this.delTask(idx)}>del</button>
-              </li>
-            )
-          })}
-        </ul>
+        <TodoForm handleChange={this.handleChange} addTask={this.addTask} newTask={newTask} />
+        <TodoList tasks={tasks} delTask={this.delTask} updateTask={this.updateTask} />
       </div>
     )
   };
