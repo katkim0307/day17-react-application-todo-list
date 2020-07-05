@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import './TodoForm.css';
 
 const TodoForm = (props) => {
     const {handleChange, addTask, newTask} = props;
     return (
-        <form onSubmit={addTask}>
+        <form id="todo-form" onSubmit={addTask}>
             <label htmlFor="taskName" />
             <input 
             onChange={handleChange} 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './App.css';
 import TodoForm from './TodoForm.js';
 import TodoList from './TodoList.js';
 
@@ -62,7 +63,7 @@ class Todo extends Component {
   render () {
     const {tasks, newTask} = this.state;
     return (
-      <div className="container">
+      <div className="App">
         <TodoForm handleChange={this.handleChange} addTask={this.addTask} newTask={newTask} />
         <TodoList tasks={tasks} delTask={this.delTask} updateTask={this.updateTask} />
       </div>
